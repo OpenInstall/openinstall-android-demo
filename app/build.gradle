@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+    defaultConfig {
+        applicationId "com.fm.openinstalldemo"
+        minSdkVersion 14
+        targetSdkVersion 30
+        versionCode 26
+        versionName "2.6.0"
+        // dev  : w11wfi, w11wfi
+        // prod : 3cge2s, openinstall
+        manifestPlaceholders = [
+                "OPENINSTALL_APPKEY": "3cge2s",
+                "OPENINSTALL_SCHEME": "openinstall",
+        ]
+    }
+
+    signingConfigs {
+
+        config {
+            storeFile file('openinstall.jks')
+            storePassword '123456'
+            keyAlias 'openinstall'
+            keyPassword '123456'
+            v2SigningEnabled true  //此处开启/关闭V2签名
+        }
+
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled true
+            signingConfig signingConfigs.config  //应用签名配置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            signingConfig signingConfigs.config  //应用签名配置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+}

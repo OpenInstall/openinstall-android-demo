@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">OpenInstallDemo</string>
+
+
+    <string name="privacy_title">服务协议和隐私政策</string>
+    <string name="privacy_desc">请你务必审慎阅读、充分理解“服务条款”和“隐私政策”各项内容，包括但不限于：
+        为了向你提供数据展示服务，优化产品体验等。我们需要收集你的设备信息，网络信息，操作日志等个人信息。
+        你可以通过登录我们的网站变更你的个人信息</string>
+    <string name="privacy_text">你可阅读《服务条款》和《隐私政策》了解详细信息。如你同意，请点击“同意”开始接受我们的服务</string>
+    <string name="privacy_negative">暂不使用</string>
+    <string name="privacy_positive">同意</string>
+
+    <string name="sign_up">注册</string>
+    <string name="sign_in">登录</string>
+
+
+
+    <string name="sign_out">退出登录</string>
+
+
+</resources>
