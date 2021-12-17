@@ -64,7 +64,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         //此处要调用，否则App在后台运行时，会无法截获
-        OpenInstall.getWakeUp(getIntent(), wakeUpAdapter);
+        OpenInstall.getWakeUp(intent, wakeUpAdapter);
     }
 
     private void showPrivacyDialog() {

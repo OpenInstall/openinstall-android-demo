@@ -42,11 +42,12 @@ public class InstallActivity extends AppCompatActivity {
                 OpenInstall.getInstall(new AppInstallAdapter() {
                     @Override
                     public void onInstall(AppData appData) {
-                        //获取渠道数据
+                        // 获取渠道数据
                         String channelCode = appData.getChannel();
-                        //获取个性化安装数据
+                        // 获取个性化安装数据
                         String bindData = appData.getData();
 
+                        // 根据获取到的参数处理业务
                         showInstallDialog(appData.toString());
 
                         Store.sharedPreferencesPut(InstallActivity.this, Store.KET_GET, String.valueOf(true));
