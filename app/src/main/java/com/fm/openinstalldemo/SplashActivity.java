@@ -131,6 +131,9 @@ public class SplashActivity extends AppCompatActivity {
         OpenInstall.init(this);
         //获取唤醒参数
         OpenInstall.getWakeUp(getIntent(), wakeUpAdapter);
+        // 如果在“Android集成” -> “Android下载配置” 中启用了 “集成应用宝” 开关并填入正确的应用宝地址
+        // 将 getWakeUp 替换使用 getWakeUpYYB ，则可实现微信/QQ中打开应用，并还原参数
+//        OpenInstall.getWakeUpYYB(SplashActivity.this, getIntent(), wakeUpAdapter);
     }
 
 
