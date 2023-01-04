@@ -5,10 +5,10 @@ android {
     buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.fm.openinstalldemo"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 30
-        versionCode 26
-        versionName "2.6.0"
+        versionCode 27
+        versionName "2.7.0"
         // dev  : w11wfi, w11wfi
         // prod : 3cge2s, openinstall
         manifestPlaceholders = [
@@ -17,27 +17,13 @@ android {
         ]
     }
 
-    signingConfigs {
-
-        config {
-            storeFile file('openinstall.jks')
-            storePassword '123456'
-            keyAlias 'openinstall'
-            keyPassword '123456'
-            v2SigningEnabled true  //此处开启/关闭V2签名
-        }
-
-    }
-
     buildTypes {
         debug {
             minifyEnabled true
-            signingConfig signingConfigs.config  //应用签名配置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled true
-            signingConfig signingConfigs.config  //应用签名配置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
