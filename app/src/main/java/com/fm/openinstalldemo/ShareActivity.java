@@ -110,8 +110,7 @@ public class ShareActivity extends AppCompatActivity {
         StringBuilder stringBuilder = new StringBuilder();
         TextView descTv = findViewById(R.id.shareDesc);
         if (!TextUtils.isEmpty(appKey)) {
-            final String shareLink = "https://app-" + appKey + ".n-9.me/page/" + appKey + "/js-test?shareCode=" + shareCode;
-//            final String shareLink = "https://app-" + appKey + ".openinstall.io/page/" + appKey + "/js-test?shareCode=" + shareCode;
+            final String shareLink = "https://app-" + appKey + ".openinstall.io/page/" + appKey + "/js-test?shareCode=" + shareCode;
             stringBuilder.append("分享链接为：").append("\n").append(shareLink).append("\n");
             findViewById(R.id.copyLink).setVisibility(View.VISIBLE);
             findViewById(R.id.copyLink).setOnClickListener(new View.OnClickListener() {
