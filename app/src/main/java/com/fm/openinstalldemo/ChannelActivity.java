@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.Toast;
 
 import com.fm.openinstall.OpenInstall;
+import com.fm.openinstall.SharePlatform;
+import com.fm.openinstall.listener.ResultCallback;
+import com.fm.openinstall.model.Error;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +45,8 @@ public class ChannelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 注册上报
                 OpenInstall.reportRegister();
-                showReportDialog();
+
+                showReportDialog(null);
             }
         });
 
@@ -49,7 +55,9 @@ public class ChannelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 效果点统计
                 OpenInstall.reportEffectPoint(POINT_TEST, 1);
-                showReportDialog();
+
+                String data = "id = " + POINT_TEST + ", value = " + 1;
+                showReportDialog(data);
             }
         });
 
@@ -62,15 +70,22 @@ public class ChannelActivity extends AppCompatActivity {
                 extraMap.put("model", Build.MODEL);
                 // 效果点统计
                 OpenInstall.reportEffectPoint(POINT_DETAIL, 1, extraMap);
-                showReportDialog();
+
+                String data = "id = " + POINT_DETAIL + ", value = " + 1;
+                data += "\n\n自定义参数：\nextraMap = " + extraMap.toString();
+                showReportDialog(data);
             }
         });
 
     }
 
-    private void showReportDialog() {
+    private void showReportDialog(String data) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("数据已提交");
+        StringBuilder stringBuilder = new StringBuilder("数据已提交");
+        if (!TextUtils.isEmpty(data)) {
+            stringBuilder.append("\n\n").append(data);
+        }
+        builder.setMessage(stringBuilder.toString());
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -80,8 +95,6 @@ public class ChannelActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
-
     }
-
 
 }

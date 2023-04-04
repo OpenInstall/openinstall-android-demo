@@ -36,6 +36,7 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask" />
+
         <activity
             android:name=".WakeupActivity"
             android:exported="false" />
@@ -44,6 +45,9 @@
             android:exported="false" />
         <activity
             android:name=".ChannelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ShareActivity"
             android:exported="false" />
 
         <meta-data

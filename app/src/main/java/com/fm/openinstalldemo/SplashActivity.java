@@ -12,10 +12,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.fm.openinstall.Configuration;
 import com.fm.openinstall.OpenInstall;
 import com.fm.openinstall.listener.AppWakeUpAdapter;
 import com.fm.openinstall.model.AppData;
@@ -128,42 +128,50 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void openinstall() {
-        OpenInstall.init(this);
+
+        Configuration configuration = new Configuration.Builder()
+//                // 只有在使用“移动广告效果监测”功能时才开启
+//                .adEnabled(true)
+                .build();
+
+        OpenInstall.init(this, configuration);
         //获取唤醒参数
         OpenInstall.getWakeUp(getIntent(), wakeUpAdapter);
-        // 如果在“Android集成” -> “Android下载配置” 中启用了 “集成应用宝” 开关并填入正确的应用宝地址
-        // 将 getWakeUp 替换使用 getWakeUpYYB ，则可实现微信/QQ中打开应用，并还原参数
+        //    1、如果在“Android集成” -> “Android下载配置” 中启用了 “集成应用宝” 开关并填入正确的应用宝地址
+        // 请替换使用 getWakeUpYYB ，则可实现微信/QQ中打开应用，并还原参数
 //        OpenInstall.getWakeUpYYB(SplashActivity.this, getIntent(), wakeUpAdapter);
+        //    2、 如果想只要调用了接口，无论是否有数据时都走回调
+        // 请替换使用 getWakeUpAlwaysCallback ，则可统一在回调中做业务跳转
+//        OpenInstall.getWakeUpAlwaysCallback(getIntent(), wakeUpAdapter);
     }
 
 
     /**
      * 唤醒参数获取回调
-     * 如果在没有数据时有特殊的需求，可将AppWakeUpAdapter替换成AppWakeUpListener
-     *
-     * @param appData
      */
     AppWakeUpAdapter wakeUpAdapter = new AppWakeUpAdapter() {
         @Override
         public void onWakeUp(AppData appData) {
-            //获取渠道数据
+            // 获取渠道数据
             String channelCode = appData.getChannel();
-            //获取自定义数据
+            // 获取H5落地页传递的数据
             String bindData = appData.getData();
 
-            // 根据获取到的参数处理业务
-            showWakeUpDialog(appData.toString());
+            // 根据获取到的数据处理业务
+            showWakeUpDialog(appData);
 
         }
     };
 
 
-    private void showWakeUpDialog(String data) {
-        if (TextUtils.isEmpty(data)) return;
+    private void showWakeUpDialog(AppData appData) {
+        if (appData == null) return;
         showWakeUp = true;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("OpenInstall");
-        builder.setMessage("这是App被拉起获取的数据\n" + data);
+        builder.setMessage("这是App被拉起获取的数据\n"
+                + "channelCode=" + appData.getChannel() + "\n"
+                + "bindData=" + appData.getData());
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
