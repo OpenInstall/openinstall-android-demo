@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
             openinstall();
 
             // 检查是否有权限
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                     @Override
@@ -51,8 +51,9 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 }, 1800);
             } else {
+                // 权限请求仅用于演示 SDK 初始化时的时机，SDK本身不依赖任何权限
                 ActivityCompat.requestPermissions(SplashActivity.this,
-                        new String[]{Manifest.permission.READ_PHONE_STATE}, 100);
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
             }
         } else {
             // 展示《服务协议》和《隐私政策》
@@ -89,8 +90,9 @@ public class SplashActivity extends AppCompatActivity {
                 // 初始化需要在权限申请（requestPermissions）之前，或者权限处理（onRequestPermissionsResult）之后
                 openinstall();
 
+                // 权限请求仅用于演示 SDK 初始化时的时机，SDK本身不依赖任何权限
                 ActivityCompat.requestPermissions(SplashActivity.this,
-                        new String[]{Manifest.permission.READ_PHONE_STATE}, 100);
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
 
             }
         });
@@ -130,6 +132,7 @@ public class SplashActivity extends AppCompatActivity {
     private void openinstall() {
 
         Configuration configuration = new Configuration.Builder()
+                .serialNumber(null)  // 禁止 SDK 获取 serialNumber
 //                // 只有在使用“移动广告效果监测”功能时才开启
 //                .adEnabled(true)
                 .build();
