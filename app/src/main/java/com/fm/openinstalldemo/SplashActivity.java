@@ -7,11 +7,11 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -41,8 +41,8 @@ public class SplashActivity extends AppCompatActivity {
             // 初始化需要在权限申请（requestPermissions）之前，或者权限处理（onRequestPermissionsResult）之后
             openinstall();
 
-            // 检查是否有权限
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+            // 检查是否有权限，SDK不依赖此权限，仅在此示例中演示权限申请
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                     @Override
@@ -51,8 +51,9 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 }, 1800);
             } else {
+                // SDK不依赖此权限，仅在此示例中演示权限申请
                 ActivityCompat.requestPermissions(SplashActivity.this,
-                        new String[]{Manifest.permission.READ_PHONE_STATE}, 100);
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
             }
         } else {
             // 展示《服务协议》和《隐私政策》
@@ -88,9 +89,9 @@ public class SplashActivity extends AppCompatActivity {
 
                 // 初始化需要在权限申请（requestPermissions）之前，或者权限处理（onRequestPermissionsResult）之后
                 openinstall();
-
+                // SDK不依赖此权限，仅在此示例中演示权限申请
                 ActivityCompat.requestPermissions(SplashActivity.this,
-                        new String[]{Manifest.permission.READ_PHONE_STATE}, 100);
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
 
             }
         });
@@ -128,10 +129,13 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void openinstall() {
-
+        // 所有的设备标识符开发者都可控制，请参考集成文档
         Configuration configuration = new Configuration.Builder()
+//                .serialNumber(null)  // 禁止 SDK 获取 serialNumber
 //                // 只有在使用“移动广告效果监测”功能时才开启
 //                .adEnabled(true)
+//                .imeiDisabled()  // 禁止 SDK 获取 imei
+//                .oaid("传入获取到的oaid")
                 .build();
 
         OpenInstall.init(this, configuration);

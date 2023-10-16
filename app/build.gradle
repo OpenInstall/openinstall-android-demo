@@ -7,8 +7,8 @@ android {
         applicationId "com.fm.openinstalldemo"
         minSdkVersion 16
         targetSdkVersion 33
-        versionCode 28
-        versionName "2.8.0"
+        versionCode 30
+        versionName "2.8.2"
 
         manifestPlaceholders = [
                 "OPENINSTALL_APPKEY": "3cge2s",
@@ -30,5 +30,5 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
 }

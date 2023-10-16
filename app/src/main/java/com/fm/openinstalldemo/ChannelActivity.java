@@ -3,17 +3,13 @@ package com.fm.openinstalldemo;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import com.fm.openinstall.OpenInstall;
-import com.fm.openinstall.SharePlatform;
-import com.fm.openinstall.listener.ResultCallback;
-import com.fm.openinstall.model.Error;
 
 import java.util.HashMap;
 import java.util.Map;
